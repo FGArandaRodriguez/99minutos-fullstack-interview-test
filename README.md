@@ -26,7 +26,7 @@ For example:
 
 ```
 
-python3 create_creds.py postgres_user postgres_password db_name github_user github_password
+python3 create_creds.py postgres_user postgres_password db_name github_user github_password github_token
 
 ```
 This will generate a config.json file
