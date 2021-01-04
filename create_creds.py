@@ -4,13 +4,13 @@ import json
 import subprocess
 
 
-def make_creds_file(postgres_user, postgres_password, db_name, github_user, github_password):
+def make_creds_file(postgres_user, postgres_password, db_name, github_user, github_password, github_token):
     
     if os.path.isfile('./config.json'):
         print('config file already exist')
     else:
         data = {'postgres_user': postgres_user, 'postgres_password': postgres_password,
-                'db_name': db_name, 'github_user': github_user, 'github_password': github_password}
+                'db_name': db_name, 'github_user': github_user, 'github_password': github_password, 'github_token': github_token}
         with open('config.json', mode='w+') as outfile:
             json.dump(data, outfile)
         print('config file was created')
@@ -25,6 +25,7 @@ def read_creds_file():
         config['db_name'] = data['db_name']
         config['github_user'] = data['github_user']
         config['github_password'] = data['github_password']
+        config['github_token'] = data['github_token']
 
         return config
 
@@ -51,7 +52,11 @@ if __name__ == "__main__":
                         help="This is your password in GitHub",
                         type=str)
 
+    parser.add_argument("github_token",
+                        help="This is your password in GitHub",
+                        type=str)
+
     args = parser.parse_args()
 
     make_creds_file(args.postgres_user, args.postgres_password,
-                    args.db_name, args.github_user, args.github_password)
+                    args.db_name, args.github_user, args.github_password, args.github_token)

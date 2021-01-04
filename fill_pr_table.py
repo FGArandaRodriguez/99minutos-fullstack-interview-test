@@ -16,7 +16,8 @@ db.init_app(app)
 # using username and password to connect with GitHub
 user = creds['github_user']
 password = creds['github_password']
-g = Github("0be22f2afd6ba5be75a9fc9a4e07dd3dfbb66f8d")
+token = creds['github_token']
+g = Github(token)
 repo_name = '99minutos-fullstack-interview-test'
 #repo = g.get_user().get_repo(repo_name)
 
