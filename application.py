@@ -9,6 +9,7 @@ import os
 from models import * 
 from get_repo import get_repo 
 from create_creds import read_creds_file 
+from requests.auth import HTTPBasicAuth 
  
 creds = read_creds_file() 
 
@@ -217,14 +218,18 @@ def branches_api():
 def branch_api(branch_id):
     branch_name = branch_id
     commits_list = []
-    base_url = f"https://api.github.com/repos/FGArandaRodriguez/99minutos-fullstack-interview-test/branches/"
+    #base_url = f"https://api.github.com/repos/FGArandaRodriguez/99minutos-fullstack-interview-test/branches/"
     branch = repo.get_branch(branch_name)
 
     for c in repo.get_commits(sha=branch_name, since=repo.created_at):
         commit = repo.get_commit(sha=c.sha)
-        query = requests.get(base_url + branch_name)
+        base_url = f"https://api.github.com/repos/FGArandaRodriguez/99minutos-fullstack-interview-test/commits?sha="+ c.sha
+        query = requests.get(base_url, auth = HTTPBasicAuth(user, password))
         query = query.json()
-        current_branch = query['name']
+
+        print(query)
+
+        current_branch = branch_name
 
         #validar que un diccionario traigadatos
         if query:
@@ -239,11 +244,11 @@ def branch_api(branch_id):
             
             commits_list.append({
                 "id": c.sha,
-                "message": query['commit']['commit']['message'],
-                "timestamp":query['commit']['commit']['committer']['date'],
-                "name": query['commit']['commit']['author']['name'],
-                "email": query['commit']['commit']['committer']['email'],
-                "branch_id":query['name'],
+                "message": query[0]['commit']['message'],
+                "timestamp":query[0]['commit']['committer']['date'],
+                "name": query[0]['commit']['author']['name'],
+                "email": query[0]['commit']['committer']['email'],
+                "branch_id":branch_name,
                 "files_changed": len(commit_to_get_files.files)
             })
     response = make_response(jsonify(results=commits_list))
