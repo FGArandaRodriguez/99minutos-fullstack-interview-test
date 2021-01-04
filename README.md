@@ -1,5 +1,69 @@
 
+## Requirements
 
+### 1.-To run the project you need to enter the following command:
+```
+    pip3 install -r requirements.txt
+```
+### 2. Install PostgreSQL
+*You need to have PostgreSQL installed*
+If you do not have it installed you can follow the steps described in the link:
+[How to install PostgreSQL](https://www.digitalocean.com/community/tutorials/como-instalar-y-utilizar-postgresql-en-ubuntu-18-04-es)
+
+### Please Run this code to continue
+You need create the credentials for this  project.
+
+Please Run the command: python3 create_creds.py with the 5 positional args you will need to substitute: 
+
+- postgres_user is your username in Postgres
+- postgres_password is your password in Postgres
+- db_name is how you want to name the db
+- github_user is your username in GitHub
+- github_password is your password in GitHub
+
+For example: 
+
+```
+
+python3 create_creds.py postgres_user postgres_password db_name github_user github_password
+
+```
+
+### Please create the DB Schema:
+
+To do that run in terminal the file make_db_schema.py
+
+```
+
+python3 make_db_schema.py
+
+```
+### 3. Run the project
+
+if you already have the database, run the command python main.py.
+
+Example:
+
+```
+python3 main.py
+
+```
+## NOTE:
+The repository 99minutos-fullstack-interview-test  must exist in the user account that inserts its credentials to run the code.
+
+## IMAGES OF APPLICATION
+
+ ![Screenshot](index.png)
+
+ ![Screenshot](branches.png)
+
+ ![Screenshot](commits.png)
+
+ ![Screenshot](commitsdetails.png)
+
+ ![Screenshot](pull_request.png)
+
+ ![Screenshot](createpullrequest.png)
 
 
 # 99minutos Fullstack Engineer Interview

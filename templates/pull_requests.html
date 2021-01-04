@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Pull Requests
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block text-white" href="/">
+            Home / Index
+        </a>
+        <a class="py-2  text-white" href="{{ url_for('branches') }}"
+            aria-label="Product">Branches</a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequests') }}"><strong>Pull Requests</strong></a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequest_form') }}">Create a new Pull
+            Request</a>
+
+    </div>
+</nav>
+<div class="text-center">
+    <h1>All Pull Requests</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Recent Pull Request
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pr in pull_requests %}
+                    <tr>
+                        <td>
+                            <li>Author: {{ pr.author }}</li>
+                            <li>Title: {{ pr.title }}</li>
+                            <li>Description: {{ pr.description }}</li>
+                            {% if pr.status == "open" %}
+                            <form action="{{ url_for('close_pullrequest') }}" method="post">
+                                <input type="hidden" name="pr_title" placeholder="{{pr.title}}" value="{{pr.title}}">
+                                <input type="hidden" name="pr_base" placeholder="{{pr.base}}" value="{{pr.base}}">
+                                <input type="submit" value="Close Pull Request">
+                            </form>
+                            {% else %}
+                            <li>Status: {{ pr.status }}</li></br>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="text-center">
+    <a class="btn btn-primary my-2" href="{{ url_for('index') }}"> Return to index</a></br>
+</div>
+
+{% endblock %}

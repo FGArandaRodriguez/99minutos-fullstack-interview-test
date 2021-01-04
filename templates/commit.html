@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Commit details
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block text-white" href="/" >
+            Home / Index
+        </a>
+        <a class="py-2  text-white" href="{{ url_for('branches') }}"aria-label="Product"><strong>Branches</strong></strong></a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequests') }}">Pull Requests</a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequest_form') }}">Create a new Pull Request</a>
+
+    </div>
+</nav>
+    <div class="text-center">
+        <h1>Commit details</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                Recent Commits
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {% if commit %}
+                                <li>ID: {{ commit.id }}</li>
+                                <li>Name: {{ commit.name }}</li>
+                                <li>Email: {{ commit.email }}</li>
+                                <li>Description: {{ commit.message }}</li>
+                                <li>Created at: {{ commit.timestamp }}</li>
+                                {% if commit.files_changed %}
+                                    <li>Files changed: {{ commit.files_changed }}</li></br>
+                                {% else %} 
+                                    <li>No files changed</li>
+                                {% endif %}
+                                {% else %}
+                                <li>No commit.</li>
+                                {% endif %}                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-primary my-2" href="{{ url_for('index') }}"> Return to index</a></br>
+        <a class="btn btn-secondary my-2"S href="{{ url_for('branches') }}"> Return to list of branches</a></br>
+
+    </div>
+    
+    
+
+
+{% endblock %}

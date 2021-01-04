@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Pull Request Form
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block text-white" href="/" >
+            Home / Index
+        </a>
+        <a class="py-2  text-white" href="{{ url_for('branches') }}"aria-label="Product">Branches</a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequests') }}">Pull Requests</a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequest_form') }}"><strong>Create a new Pull Request</strong></a>
+
+    </div>
+</nav>
+<div class="text-center">
+    <h1>Create a pull request</h1>
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <form action="{{ url_for('create_pullrequest') }}" method="post">
+                    <label for="base">Base Branch:</label><br>
+                    <input name="base" id="base" placeholder="Base branch">
+                </br>
+                    <label for="compare">Compare Branch:</label><br>
+                    <input name="compare" id="compare" placeholder="Compare branch">
+                </br>
+                    <label for="pr_title">Title:</label><br>
+                    <input name="pr_title" id="pr_title" placeholder="Pull Request Title">
+                </br>
+                    <label for="pr_body">Description:</label><br>
+                    <input name="pr_body" id="pr_body" placeholder="Pull Request Description">
+                </br>
+                        
+                    <input type="radio" id="Open" name="status" value="open">
+                    <label for="Open">Open</label><br>
+                </br>
+                    <input type="radio" id="Merge" name="status" value="merge">
+                    <label for="Open">Merge</label><br>
+            
+                    <input  class="btn btn-success my-2" type="submit" value="Create Pull Request">
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-primary my-2" href="{{ url_for('index') }}"> Return to index</a></br>
+    </div>
+    
+
+{% endblock %}

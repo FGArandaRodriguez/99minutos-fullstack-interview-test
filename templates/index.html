@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block text-white" href="/" aria-label="Product">
+            <strong>Home / Index</strong>
+        </a>
+        <a class="py-2 text-white" href="{{ url_for('branches') }}">Branches</a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequests') }}">Pull Requests</a>
+        <a class="py-2 d-none d-md-inline-block text-white" href="{{ url_for('pullrequest_form') }}">Create a new Pull Request</a>
+
+    </div>
+</nav>
+
+<br>
+</br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">API Resources</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="{{ url_for('branches_api') }}">GET Branches</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ url_for('pullrequests_api') }}">GET Pull Requests</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-9">
+            <div class="text-center">
+            <div>
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
