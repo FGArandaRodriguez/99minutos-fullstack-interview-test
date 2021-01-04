@@ -20,6 +20,7 @@ Please Run the command: python3 create_creds.py with the 5 positional args you w
 - db_name is how you want to name the db
 - github_user is your username in GitHub
 - github_password is your password in GitHub
+- github_token is your personal token of github, (If you don't have a personal access token, you must create it. You can rely on the following link [How to create Github personal access token](https://docs.github.com/es/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token))
 
 For example: 
 
@@ -28,6 +29,7 @@ For example:
 python3 create_creds.py postgres_user postgres_password db_name github_user github_password
 
 ```
+This will generate a config.json file
 
 ### Please create the DB Schema:
 
